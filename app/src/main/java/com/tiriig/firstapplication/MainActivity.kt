@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
+    //This is comment
     private lateinit var myTextView: TextView
     private lateinit var mybutton: Button
 
@@ -18,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         mybutton = findViewById(R.id.saveUser)
 
         mybutton.setOnClickListener {
-
-            myTextView.text = "We changed the text"
+            Toast.makeText(this,"Hello from Toast",Toast.LENGTH_LONG).show()
         }
     }
 }
