@@ -8,6 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:src="@drawable/somlogo"
+        android:id="@+id/myImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+
     <EditText
         android:id="@+id/myEditText"
         android:hint="Enter your Email"
@@ -15,6 +22,11 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/mySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 
     <Button
         android:visibility="visible"
