@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.room.Room
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +25,19 @@ class MainActivity : AppCompatActivity() {
         val  editText = findViewById<EditText>(R.id.myEditText)
 
         mybutton.setOnClickListener {
-            val gotoDisplay = Intent(this,DisplayActivity::class.java)
-            gotoDisplay.putExtra("name",editText.text.toString())
-            startActivity(gotoDisplay)
+//            val gotoDisplay = Intent(this,DisplayActivity::class.java)
+//            gotoDisplay.putExtra("name",editText.text.toString())
+//            startActivity(gotoDisplay)
+
+            val db = Room.databaseBuilder(
+                    applicationContext,MyDatabase::class.java,
+                    "myDatabase"
+            ).build()
+
+            val userDao = db.userDao()
+            val user = User(10,"Mohamed","Jama")
+            userDao.insert(user)
+
         }
     }
 
