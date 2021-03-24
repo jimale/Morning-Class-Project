@@ -3,6 +3,7 @@ package com.tiriig.firstapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.room.Room
 
@@ -29,14 +30,17 @@ class MainActivity : AppCompatActivity() {
 //            gotoDisplay.putExtra("name",editText.text.toString())
 //            startActivity(gotoDisplay)
 
-            val db = Room.databaseBuilder(
-                    applicationContext,MyDatabase::class.java,
-                    "myDatabase"
-            ).build()
+            Thread{
+                val db = Room.databaseBuilder(
+                        applicationContext,MyDatabase::class.java,
+                        "myDatabase"
+                ).build()
+                val userDao = db.userDao()
+                val user = User(10,"Mohamed","Jama")
+                userDao.insert(user)
 
-            val userDao = db.userDao()
-            val user = User(10,"Mohamed","Jama")
-            userDao.insert(user)
+
+            }.start()
 
         }
     }
