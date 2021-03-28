@@ -9,11 +9,18 @@ import androidx.room.Room
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var firstName: TextView
+    private lateinit var lastName: TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val spinner = findViewById<Spinner>(R.id.mySpinner)
+
+        firstName = findViewById(R.id.firstName)
+        lastName = findViewById(R.id.lastName)
 
         val languages = arrayOf("Select language","Kotlin","Java","Node js","Php")
 
@@ -36,8 +43,17 @@ class MainActivity : AppCompatActivity() {
                         "myDatabase"
                 ).build()
                 val userDao = db.userDao()
-                val user = User(10,"Mohamed","Jama")
-                userDao.insert(user)
+//                val user = User(10,"Mohamed","Jama")
+//
+//              userDao.insert(user)
+
+                val singleUser = userDao.getSingleUser(10)
+
+                runOnUiThread {
+                    firstName.text = "Firstname: "+singleUser.firstname
+                    lastName.text = "LastName: "+singleUser.lastname
+                }
+
 
 
             }.start()
