@@ -1,11 +1,8 @@
 package com.tiriig.firstapplication
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
-import androidx.room.Room
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,31 +30,14 @@ class MainActivity : AppCompatActivity() {
         val  editText = findViewById<EditText>(R.id.myEditText)
 
         mybutton.setOnClickListener {
-//            val gotoDisplay = Intent(this,DisplayActivity::class.java)
-//            gotoDisplay.putExtra("name",editText.text.toString())
-//            startActivity(gotoDisplay)
-
             Thread{
-                val db = Room.databaseBuilder(
-                        applicationContext,MyDatabase::class.java,
-                        "myDatabase"
-                ).build()
-                val userDao = db.userDao()
-//                val user = User(10,"Mohamed","Jama")
-//
-//              userDao.insert(user)
 
-                val singleUser = userDao.getSingleUser(10)
-
-                runOnUiThread {
-                    firstName.text = "Firstname: "+singleUser.firstname
-                    lastName.text = "LastName: "+singleUser.lastname
-                }
-
-
-
+                val db = MyDatabase.invoke(this)
+                //delete user
+                db.userDao().deleteUser(2)
+                //update user
+                db.userDao().update("Mohamed",1)
             }.start()
-
         }
     }
 
