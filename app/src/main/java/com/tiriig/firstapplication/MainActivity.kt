@@ -6,39 +6,37 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var firstName: TextView
-    private lateinit var lastName: TextView
+    private lateinit var name : EditText
+    private lateinit var phone : EditText
+    private lateinit var email : EditText
+
+    private lateinit var saveButton : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val spinner = findViewById<Spinner>(R.id.mySpinner)
+        name = findViewById(R.id.name)
+        phone = findViewById(R.id.phone)
+        email = findViewById(R.id.email)
+        saveButton = findViewById(R.id.saveUser)
 
-        firstName = findViewById(R.id.firstName)
-        lastName = findViewById(R.id.lastName)
-
-        val languages = arrayOf("Select language","Kotlin","Java","Node js","Php")
-
-        val data = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
-
-        spinner.adapter = data
-
-
-        val mybutton = findViewById<Button>(R.id.saveUser)
-        val  editText = findViewById<EditText>(R.id.myEditText)
-
-        mybutton.setOnClickListener {
-            Thread{
-
-                val db = MyDatabase.invoke(this)
-                //delete user
-                db.userDao().deleteUser(2)
-                //update user
-                db.userDao().update("Mohamed",1)
-            }.start()
+        saveButton.setOnClickListener {
+            saveUser()
         }
+
     }
 
+    fun saveUser(){
+        Thread{
+
+            val db = MyDatabase.invoke(this)
+            db.userDao().insert(User(0,
+                    name.text.toString(),
+                    phone.text.toString(),
+                    email.text.toString()
+            ))
+        }.start()
+    }
 }
