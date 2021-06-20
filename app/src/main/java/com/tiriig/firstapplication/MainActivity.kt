@@ -3,6 +3,7 @@ package com.tiriig.firstapplication
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,11 +33,14 @@ class MainActivity : AppCompatActivity() {
         Thread{
 
             val db = MyDatabase.invoke(this)
-            db.userDao().insert(User(0,
-                    name.text.toString(),
-                    phone.text.toString(),
-                    email.text.toString()
-            ))
+
+            val users = ArrayList<User>()
+            users.add(User(1,"Mohamed Ali","46282932","mohamed@gmail.com"))
+            users.add(User(2,"Ahmed Jama","72322932","ahmed@gmail.com"))
+            users.add(User(3,"Ali Ali","34282932","ali@gmail.com"))
+
+            db.userDao().insert(users)
+
         }.start()
     }
 }

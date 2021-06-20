@@ -16,6 +16,7 @@
     <TextView
         android:id="@+id/phone"
         android:text="43876483"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -23,6 +24,7 @@
     <TextView
         android:id="@+id/email"
         android:text="ahmed@gmail.com"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

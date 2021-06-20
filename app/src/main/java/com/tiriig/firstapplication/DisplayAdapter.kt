@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,15 +23,19 @@ class DisplayAdapter : ListAdapter<User,DisplayAdapter.ViewHolder>(DisplayDiffCa
 
     inner class ViewHolder(view:View): RecyclerView.ViewHolder(view){
 
+        var currentData : User? = null
+
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, "Phone Number is: ${currentData?.phone}",Toast.LENGTH_LONG).show()
+            }
+        }
 
         val name : TextView = itemView.findViewById(R.id.name)
-        val phone : TextView = itemView.findViewById(R.id.phone)
-        val email : TextView = itemView.findViewById(R.id.email)
 
         fun bind(user: User){
             name.text = user.name
-            phone.text = user.phone
-            email.text = user.email
+            currentData = user
         }
 
     }
